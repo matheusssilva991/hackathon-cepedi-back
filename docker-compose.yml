@@ -1,0 +1,44 @@
+services:
+  hackathon_cepedi_api:
+    build: .
+    image: hackathon_cepedi_api
+    ports: 
+      - "3000:3000"
+    expose:
+      - "3000"
+    depends_on:
+      - mysql_db
+    environment:
+      PORT: 3333
+      SECRET_KEY: 4O,Hefe%U_M9kRuu&@dxGrG+pwReQse
+      DB_USERNAME: "test"
+      DB_PASSWORD: "test"
+      DB_DATABASE: "hackathon_cepedi"
+      DB_HOST: "mysql_db"
+      DB_PORT: "3306"
+    networks:
+      - backend
+    
+  mysql_db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hackathon_cepedi
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:
+      - "3307:3306"
+    expose:
+      - "3306"
+    volumes:
+      - mysql_data:/var/lib/docker/volumes/mysql_data
+    networks:
+      - backend
+
+volumes:
+  mysql_data:
+
+networks:
+  backend:
+    driver: bridge
