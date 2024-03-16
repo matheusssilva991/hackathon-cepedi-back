@@ -3,6 +3,7 @@ import {
   IsDate,
   IsEmail,
   IsNotEmpty,
+  IsOptional,
   IsString,
   IsStrongPassword,
 } from 'class-validator';
@@ -13,14 +14,16 @@ export class CreateUserDto {
   name: string;
 
   @IsString({ message: 'O campo cpf deve ser uma string.' })
+  @IsOptional({ message: 'O campo cpf é opcional.' })
   cpf: string;
 
   @IsString({ message: 'O campo cnpj deve ser uma string.' })
+  @IsOptional({ message: 'O campo cnpj é opcional.' })
   cnpj: string;
 
   @IsDate({ message: 'O campo birthDate deve ser uma data.' })
   @IsNotEmpty({ message: 'O campo birthDate não pode ser vazio.' })
-  @Transform(({ value }) => new Date(value).toISOString())
+  @Transform(({ value }) => new Date(value))
   birthDate: string;
 
   @IsEmail({}, { message: 'O campo email deve ser um email válido.' })

@@ -21,6 +21,16 @@ export class UserService {
     // Verifica se o email já está cadastrado
     await this.emailAlreadyExists(createUserDto.email);
 
+    // Verifica se o cpf já está cadastrado
+    if (createUserDto.cpf) {
+      await this.cpfAlreadyExists(createUserDto.cpf);
+    }
+
+    // Verifica se o cnpj já está cadastrado
+    if (createUserDto.cnpj) {
+      await this.cnpjAlreadyExists(createUserDto.cnpj);
+    }
+
     // Criptografa a senha
     const salt = await bcrypt.genSalt(10);
     createUserDto.password = await bcrypt.hash(createUserDto.password, salt);
@@ -49,6 +59,16 @@ export class UserService {
       await this.emailAlreadyExists(updateUserDto.email);
     }
 
+    // Verifica se o cpf já está cadastrado
+    if (updateUserDto.cpf && updateUserDto.cpf !== user.cpf) {
+      await this.cpfAlreadyExists(updateUserDto.cpf);
+    }
+
+    // Verifica se o cnpj já está cadastrado
+    if (updateUserDto.cnpj && updateUserDto.cnpj !== user.cnpj) {
+      await this.cnpjAlreadyExists(updateUserDto.cnpj);
+    }
+
     if (updateUserDto.password) {
       const salt = await bcrypt.genSalt(10);
       updateUserDto.password = await bcrypt.hash(updateUserDto.password, salt);
@@ -69,6 +89,22 @@ export class UserService {
 
     if (count > 0) {
       throw new BadRequestException('Email já cadastrado!');
+    }
+  }
+
+  async cpfAlreadyExists(cpf: string) {
+    const count = await this.userRepository.count({ where: { cpf } });
+
+    if (count > 0) {
+      throw new BadRequestException('CPF já cadastrado!');
+    }
+  }
+
+  async cnpjAlreadyExists(cnpj: string) {
+    const count = await this.userRepository.count({ where: { cnpj } });
+
+    if (count > 0) {
+      throw new BadRequestException('CNPJ já cadastrado!');
     }
   }
 }
