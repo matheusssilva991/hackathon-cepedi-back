@@ -13,7 +13,7 @@ services:
       SECRET_KEY: 4O,Hefe%U_M9kRuu&@dxGrG+pwReQse
       DB_USERNAME: "test"
       DB_PASSWORD: "test"
-      DB_DATABASE: "hackathon_cepedi"
+      DB_NAME: "hackathon_cepedi"
       DB_HOST: "mysql_db"
       DB_PORT: "3306"
     networks:
