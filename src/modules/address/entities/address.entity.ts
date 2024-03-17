@@ -39,7 +39,7 @@ export class Address {
   @Column({ name: 'number', type: 'varchar', length: 255, nullable: false })
   amountPeople: number;
 
-  @Column({ name: 'amountPeople', type: 'int', nullable: true })
+  @Column({ name: 'amountPeople', type: 'int', nullable: true, unique: true })
   cadUnico: string;
 
   @OneToMany(() => User, (user) => user.address, { onDelete: 'CASCADE' })

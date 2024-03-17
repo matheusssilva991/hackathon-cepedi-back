@@ -3,6 +3,7 @@ import {
   IsInt,
   IsNotEmpty,
   IsOptional,
+  IsPositive,
   IsString,
 } from 'class-validator';
 
@@ -32,10 +33,14 @@ export class CreateAddressDto {
   postalCode: string;
 
   @IsString({ message: 'O campo número deve ser uma string.' })
+  @IsNotEmpty({ message: 'O campo número não pode ser vazio.' })
   number: string;
 
   @IsInt({
     message: 'O campo quantidade de pessoas deve ser um número inteiro.',
+  })
+  @IsPositive({
+    message: 'O campo quantidade de pessoas deve ser um número positivo.',
   })
   @IsNotEmpty({ message: 'O campo quantidade de pessoas não pode ser vazio.' })
   amountPeople: number;

@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -11,32 +12,35 @@ import { AddressService } from './address.service';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 
-@Controller('address')
+@Controller('api')
 export class AddressController {
   constructor(private readonly addressService: AddressService) {}
 
-  @Post()
-  create(@Body() createAddressDto: CreateAddressDto) {
-    return this.addressService.create(createAddressDto);
+  @Post('address')
+  async create(@Body() createAddressDto: CreateAddressDto) {
+    return await this.addressService.create(createAddressDto);
   }
 
-  @Get()
-  findAll() {
-    return this.addressService.findAll();
+  @Get('addresses')
+  async findAll() {
+    return await this.addressService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.addressService.findOne(+id);
+  @Get('address/:id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.addressService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAddressDto: UpdateAddressDto) {
-    return this.addressService.update(+id, updateAddressDto);
+  @Patch('address/:id')
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateAddressDto: UpdateAddressDto,
+  ) {
+    return await this.addressService.update(+id, updateAddressDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.addressService.remove(+id);
+  @Delete('address/:id')
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    return await this.addressService.remove(+id);
   }
 }
