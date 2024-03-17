@@ -31,15 +31,28 @@ export class Address {
   city: string;
 
   @Column({ name: 'state', type: 'varchar', length: 255, nullable: false })
-  postalCode: string;
+  state: string;
 
   @Column({ name: 'postalCode', type: 'varchar', length: 255, nullable: false })
-  number: string;
+  postalCode: string;
 
   @Column({ name: 'number', type: 'varchar', length: 255, nullable: false })
+  number: string;
+
+  @Column({
+    name: 'amountPeople',
+    type: 'int',
+    nullable: false,
+  })
   amountPeople: number;
 
-  @Column({ name: 'amountPeople', type: 'int', nullable: true, unique: true })
+  @Column({
+    name: 'cadUnico',
+    type: 'varchar',
+    length: 255,
+    nullable: true,
+    unique: true,
+  })
   cadUnico: string;
 
   @OneToMany(() => User, (user) => user.address, { onDelete: 'CASCADE' })

@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   IsEmpty,
   IsInt,
@@ -43,6 +44,7 @@ export class CreateAddressDto {
     message: 'O campo quantidade de pessoas deve ser um número positivo.',
   })
   @IsNotEmpty({ message: 'O campo quantidade de pessoas não pode ser vazio.' })
+  @Transform(({ value }) => parseInt(value))
   amountPeople: number;
 
   @IsString({ message: 'O campo cadUnico deve ser uma string.' })
