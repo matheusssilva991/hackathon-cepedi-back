@@ -2,6 +2,8 @@ import { Transform } from 'class-transformer';
 import {
   IsDate,
   IsEmail,
+  IsEmpty,
+  IsInt,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -9,8 +11,8 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
-  @IsString({ message: 'O campo name deve ser uma string.' })
-  @IsNotEmpty({ message: 'O campo name não pode ser vazio.' })
+  @IsString({ message: 'O campo nome deve ser uma string.' })
+  @IsNotEmpty({ message: 'O campo nome não pode ser vazio.' })
   name: string;
 
   @IsString({ message: 'O campo cpf deve ser uma string.' })
@@ -21,17 +23,17 @@ export class CreateUserDto {
   @IsOptional({ message: 'O campo cnpj é opcional.' })
   cnpj: string;
 
-  @IsDate({ message: 'O campo birthDate deve ser uma data.' })
-  @IsNotEmpty({ message: 'O campo birthDate não pode ser vazio.' })
+  @IsDate({ message: 'O campo data de nascimento deve ser uma data.' })
+  @IsNotEmpty({ message: 'O campo data de nascimento não pode ser vazio.' })
   @Transform(({ value }) => new Date(value))
   birthDate: string;
 
-  @IsEmail({}, { message: 'O campo email deve ser um email válido.' })
-  @IsNotEmpty({ message: 'O campo email não pode ser vazio.' })
+  @IsEmail({}, { message: 'O campo e-mail deve ser um email válido.' })
+  @IsNotEmpty({ message: 'O campo e-mail não pode ser vazio.' })
   email: string;
 
-  @IsString({ message: 'O campo password deve ser uma string.' })
-  @IsNotEmpty({ message: 'O campo password não pode ser vazio.' })
+  @IsString({ message: 'O campo senha deve ser uma string.' })
+  @IsNotEmpty({ message: 'O campo senha não pode ser vazio.' })
   @IsStrongPassword(
     {
       minLength: 8,
@@ -47,4 +49,14 @@ export class CreateUserDto {
     },
   )
   password: string;
+
+  @IsInt({ message: 'O campo addressId deve ser um número inteiro.' })
+  @IsOptional({ message: 'O campo addressId é opcional.' })
+  addressId: number;
+
+  @IsEmpty({ message: 'O campo createdAt não deve ser preenchido.' })
+  createdAt: Date;
+
+  @IsEmpty({ message: 'O campo updatedAt não deve ser preenchido.' })
+  updatedAt: Date;
 }

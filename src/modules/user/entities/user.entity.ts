@@ -1,4 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Address } from '../../address/entities/address.entity';
 
 @Entity({ name: 'user', orderBy: { id: 'ASC' } })
 export class User {
@@ -45,4 +54,26 @@ export class User {
 
   @Column({ name: 'password', type: 'varchar', length: 255, nullable: false })
   password: string;
+
+  @Column({ name: 'address_id', type: 'int', nullable: true })
+  addressId: number;
+
+  @ManyToOne(() => Address, (address) => address.users, {
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({ name: 'address_id' })
+  address: Address;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
 }
