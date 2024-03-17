@@ -119,4 +119,24 @@ export class UserService {
       throw new BadRequestException('CNPJ já cadastrado!');
     }
   }
+
+  async checkCredentials(email: string, password: string) {
+    const user = await this.userRepository.findOne({
+      where: { email },
+      select: ['name', 'email', 'password', 'id'],
+    });
+
+    if (!user) {
+      throw new BadRequestException('Email ou senha incorretos!');
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      throw new BadRequestException('Email ou senha incorretos!');
+    }
+
+    delete user.password;
+    return user;
+  }
 }

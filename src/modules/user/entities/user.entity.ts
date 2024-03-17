@@ -52,7 +52,13 @@ export class User {
   })
   email: string;
 
-  @Column({ name: 'password', type: 'varchar', length: 255, nullable: false })
+  @Column({
+    name: 'password',
+    type: 'varchar',
+    length: 255,
+    nullable: false,
+    select: false,
+  })
   password: string;
 
   @Column({ name: 'address_id', type: 'int', nullable: true })

@@ -89,7 +89,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Matheus\",\n    \"cpf\": \"123456787\",\n    \"birthDate\": \"2000-07-06\",\n    \"email\": \"matheus2@email.com\",\n    \"password\": \"123456@Mc\"\n}",
+							"raw": "{\n\t\"name\": \"Matheus\",\n    \"cpf\": \"12345677\",\n    \"birthDate\": \"2000-07-06\",\n    \"email\": \"matheus@email.com\",\n    \"password\": \"123456@Mc\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -467,8 +467,55 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "matheus@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456@Mc",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWF0aGV1cyIsInN1YiI6MiwiZW1haWwiOiJtYXRoZXVzQGVtYWlsLmNvbSIsImlhdCI6MTcxMDY4MjUyOCwiZXhwIjoxNzEwNjgyNTg4fQ.K6ENeX7Yj-BmvgamQgpOOKkJymXHtcG8BkjlKTeIF3w",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
