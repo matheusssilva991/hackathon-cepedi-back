@@ -4,17 +4,19 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
+import { AddressService } from '../address/address.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private readonly addressService: AddressService,
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -29,6 +31,11 @@ export class UserService {
     // Verifica se o cnpj já está cadastrado
     if (createUserDto.cnpj) {
       await this.cnpjAlreadyExists(createUserDto.cnpj);
+    }
+
+    // Verifica se o endereço existe
+    if (createUserDto.addressId) {
+      await this.addressService.findOne(createUserDto.addressId);
     }
 
     // Criptografa a senha
@@ -67,6 +74,11 @@ export class UserService {
     // Verifica se o cnpj já está cadastrado
     if (updateUserDto.cnpj && updateUserDto.cnpj !== user.cnpj) {
       await this.cnpjAlreadyExists(updateUserDto.cnpj);
+    }
+
+    // Verifica se o endereço existe
+    if (updateUserDto.addressId) {
+      await this.addressService.findOne(updateUserDto.addressId);
     }
 
     if (updateUserDto.password) {

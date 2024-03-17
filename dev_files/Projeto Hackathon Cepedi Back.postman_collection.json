@@ -17,9 +17,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -189,6 +187,282 @@
 							]
 						},
 						"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "ADDRESSES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/addresses",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADDRESS / ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/address/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADDRESS",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "street",
+									"value": "Rua A",
+									"type": "text"
+								},
+								{
+									"key": "neighborhood",
+									"value": "Bairro A",
+									"type": "text"
+								},
+								{
+									"key": "complement",
+									"value": "Localidade perigosa",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Itabuna",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "Bahia",
+									"type": "text"
+								},
+								{
+									"key": "postalCode",
+									"value": "123456",
+									"type": "text"
+								},
+								{
+									"key": "number",
+									"value": "190",
+									"type": "text"
+								},
+								{
+									"key": "amountPeople",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "cadUnico",
+									"value": "1345615157",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/address",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADDRESS / ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/address/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADDRESS / ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/address/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"address",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consumption",
+			"item": [
+				{
+					"name": "CONSUMPTIONS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/consumptions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"consumptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSUMPTION / ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/consumption/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"consumption",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSUMPTION",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "year",
+									"value": "2024",
+									"type": "text"
+								},
+								{
+									"key": "month",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "day",
+									"value": "Domingo",
+									"type": "text"
+								},
+								{
+									"key": "hour",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "consumption",
+									"value": "0.15",
+									"type": "text"
+								},
+								{
+									"key": "pattern",
+									"value": "Normal",
+									"type": "text"
+								},
+								{
+									"key": "addressId",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/consumption",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"consumption"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSUMPTION / ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/consumption/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"consumption",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CONSUMPTION / ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/consumption/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"consumption",
+								"1"
+							]
+						}
 					},
 					"response": []
 				}

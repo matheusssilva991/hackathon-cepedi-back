@@ -52,6 +52,7 @@ export class CreateUserDto {
 
   @IsInt({ message: 'O campo addressId deve ser um número inteiro.' })
   @IsOptional({ message: 'O campo addressId é opcional.' })
+  @Transform(({ value }) => parseInt(value))
   addressId: number;
 
   @IsEmpty({ message: 'O campo createdAt não deve ser preenchido.' })

@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Consumption } from '../../consumption/entities/consumption.entity';
 import { User } from '../../user/entities/user.entity';
 
 @Entity({ name: 'address', orderBy: { id: 'ASC' } })
@@ -57,6 +58,11 @@ export class Address {
 
   @OneToMany(() => User, (user) => user.address, { onDelete: 'CASCADE' })
   users: User[];
+
+  @OneToMany(() => Consumption, (consumption) => consumption.address, {
+    onDelete: 'CASCADE',
+  })
+  consumptions: Consumption[];
 
   @CreateDateColumn({
     type: 'timestamp',
