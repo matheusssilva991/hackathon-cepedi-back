@@ -9,7 +9,7 @@ services:
     depends_on:
       - mysql_db
     environment:
-      PORT: 3333
+      PORT: 3000
       SECRET_KEY: 4O,Hefe%U_M9kRuu&@dxGrG+pwReQse
       DB_USERNAME: "test"
       DB_PASSWORD: "test"
