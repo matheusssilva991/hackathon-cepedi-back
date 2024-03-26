@@ -23,7 +23,7 @@ export class AuthService {
     });
 
     return {
-      access_token: payload,
+      accessToken: payload,
     };
   }
 }
