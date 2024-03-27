@@ -19,7 +19,7 @@ export class CreateAddressDto {
 
   @IsString({ message: 'O campo complemento deve ser uma string.' })
   @IsOptional({ message: 'O campo complemento é opcional.' })
-  complement: string;
+  complement?: string;
 
   @IsString({ message: 'O campo cidade deve ser uma string.' })
   @IsNotEmpty({ message: 'O campo cidade não pode ser vazio.' })
@@ -49,7 +49,7 @@ export class CreateAddressDto {
 
   @IsString({ message: 'O campo cadUnico deve ser uma string.' })
   @IsOptional({ message: 'O campo cadUnico é opcional.' })
-  cadUnico: string;
+  cadUnico?: string;
 
   @IsEmpty({ message: 'O campo createdAt não deve ser preenchido.' })
   createdAt: Date;

@@ -4,10 +4,11 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
 import { Address } from './entities/address.entity';
+import { AddressQueryDto } from './dto/address-query.dto';
 
 @Injectable()
 export class AddressService {
@@ -25,6 +26,35 @@ export class AddressService {
 
   async findAll() {
     return await this.addressRepository.find();
+  }
+
+  async findAllWithQuery(query: AddressQueryDto) {
+    const filter = {
+      ...(query.street && { name: ILike(`%${query.street}%`) }),
+      ...(query.neighborhood && {
+        neighborhood: ILike(`%${query.neighborhood}%`),
+      }),
+      ...(query.city && { city: ILike(`%${query.city}%`) }),
+      ...(query.state && { state: ILike(`%${query.state}%`) }),
+      ...(query.postalCode && { postalCode: ILike(`%${query.postalCode}%`) }),
+      ...(query.number && { number: ILike(`%${query.number}%`) }),
+      ...(query.amountPeople && { amountPeople: query.amountPeople }),
+    };
+
+    // Ordenação
+    let sortObject: any;
+    try {
+      sortObject = JSON.parse(query.sort);
+    } catch (error) {
+      sortObject = { id: 'ASC' };
+    }
+
+    return await this.addressRepository.find({
+      where: filter,
+      order: sortObject,
+      take: query.limit || undefined,
+      skip: (query.page - 1) * query.limit || 0,
+    });
   }
 
   async findOne(id: number) {
