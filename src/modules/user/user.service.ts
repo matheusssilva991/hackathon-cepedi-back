@@ -5,11 +5,12 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { AddressService } from '../address/address.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { UserQueryDto } from './dto/user-query.dto';
 
 @Injectable()
 export class UserService {
@@ -47,6 +48,28 @@ export class UserService {
 
   async findAll() {
     return await this.userRepository.find();
+  }
+
+  async findAllWithQuery(query: UserQueryDto) {
+    const filter = {
+      ...(query.name && { name: ILike(`%${query.name}%`) }),
+      ...(query.address && { addressId: query.address }),
+    };
+
+    // Ordenação
+    let sortObject: any;
+    try {
+      sortObject = JSON.parse(query.sort);
+    } catch (error) {
+      sortObject = { id: 'ASC' };
+    }
+
+    return await this.userRepository.find({
+      where: filter,
+      order: sortObject,
+      take: query.limit || undefined,
+      skip: (query.page - 1) * query.limit || 0,
+    });
   }
 
   async findOne(id: number) {

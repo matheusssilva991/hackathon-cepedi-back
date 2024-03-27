@@ -111,6 +111,16 @@ Para acessar as rotas do projeto:
 > | ------- | -------- | --------- | ------------------------------- |
 > | `accessToken` | required | string    | Token de autorização do usuário |
 
+#### • Query
+
+> | name    | type     | data type | description                     |
+> | ------- | -------- | --------- | ------------------------------- |
+> | `name` | required | string    | Nome do usuário |
+> | `address` | optional | number    | ID do endereço do usuário |
+> | `page` | required | number   | Página |
+> | `limit` | optional | number    | Limite de registros por página |
+> | `sort` | required | object   | Chave de ordenação |
+
 #### • Respostas
 
 > | http code | content-type       | response                                 |
@@ -164,7 +174,6 @@ Para acessar as rotas do projeto:
 > | `name` | required | string    | Nome do usuário |
 > | `cpf` | optional | string    | CPF do usuário |
 > | `cnpj` | optional | string    | CNPJ da empresa |
-> | `birthDate` | required | string    | Data de nascimento do usuário |
 > | `email` | required | string    | E-mail do usuário |
 > | `password` | required | string    | Senha do usuário |
 > | `addressId` | optional | number    | ID do endereço do usuário |
@@ -202,7 +211,6 @@ Para acessar as rotas do projeto:
 > | `name` | optional | string    | Nome do usuário |
 > | `cpf` | optional | string    | CPF do usuário |
 > | `cnpj` | optional | string    | CNPJ da empresa |
-> | `birthDate` | optional | string    | Data de nascimento do usuário |
 > | `email` | optional | string    | E-mail do usuário |
 > | `password` | optional | string    | Senha do usuário |
 > | `addressId` | optional | number    | ID do endereço do usuário |
@@ -310,7 +318,7 @@ Para acessar as rotas do projeto:
 > | name    | type     | data type | description                     |
 > | ------- | -------- | --------- | ------------------------------- |
 > | `street` | required | string    | Rua |
-> | `sneighborhood` | required | string    | Bairro |
+> | `neighborhood` | required | string    | Bairro |
 > | `complement` | optional | string    | Complemento |
 > | `city` | required | string    | Cidade |
 > | `state` | required | string    | Estado |
@@ -350,7 +358,7 @@ Para acessar as rotas do projeto:
 > | name    | type     | data type | description                     |
 > | ------- | -------- | --------- | ------------------------------- |
 > | `street` | optional | string    | Rua |
-> | `sneighborhood` | optional | string    | Bairro |
+> | `neighborhood` | optional | string    | Bairro |
 > | `complement` | optional | string    | Complemento |
 > | `city` | optional | string    | Cidade |
 > | `state` | optional | string    | Estado |

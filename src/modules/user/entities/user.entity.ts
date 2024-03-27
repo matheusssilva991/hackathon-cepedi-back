@@ -29,7 +29,7 @@ export class User {
     nullable: true,
     unique: true,
   })
-  cpf: string;
+  cpf?: string;
 
   @Column({
     name: 'cnpj',
@@ -38,7 +38,7 @@ export class User {
     nullable: true,
     unique: true,
   })
-  cnpj: string;
+  cnpj?: string;
 
   @Column({
     name: 'email',
@@ -59,7 +59,7 @@ export class User {
   password: string;
 
   @Column({ name: 'address_id', type: 'int', nullable: true })
-  addressId: number;
+  addressId?: number;
 
   @ManyToOne(() => Address, (address) => address.users, {
     onDelete: 'SET NULL',

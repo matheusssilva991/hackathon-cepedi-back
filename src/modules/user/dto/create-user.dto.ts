@@ -16,11 +16,11 @@ export class CreateUserDto {
 
   @IsString({ message: 'O campo cpf deve ser uma string.' })
   @IsOptional({ message: 'O campo cpf é opcional.' })
-  cpf: string;
+  cpf?: string;
 
   @IsString({ message: 'O campo cnpj deve ser uma string.' })
   @IsOptional({ message: 'O campo cnpj é opcional.' })
-  cnpj: string;
+  cnpj?: string;
 
   @IsEmail({}, { message: 'O campo e-mail deve ser um email válido.' })
   @IsNotEmpty({ message: 'O campo e-mail não pode ser vazio.' })
@@ -47,7 +47,7 @@ export class CreateUserDto {
   @IsInt({ message: 'O campo addressId deve ser um número inteiro.' })
   @IsOptional({ message: 'O campo addressId é opcional.' })
   @Transform(({ value }) => parseInt(value))
-  addressId: number;
+  addressId?: number;
 
   @IsEmpty({ message: 'O campo createdAt não deve ser preenchido.' })
   createdAt: Date;
