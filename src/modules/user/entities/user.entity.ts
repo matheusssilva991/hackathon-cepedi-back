@@ -40,9 +40,6 @@ export class User {
   })
   cnpj: string;
 
-  @Column({ name: 'birth_date', type: 'date', nullable: true })
-  birthDate: string;
-
   @Column({
     name: 'email',
     type: 'varchar',

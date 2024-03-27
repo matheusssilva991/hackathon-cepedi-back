@@ -1,6 +1,5 @@
 import { Transform } from 'class-transformer';
 import {
-  IsDate,
   IsEmail,
   IsEmpty,
   IsInt,
@@ -22,11 +21,6 @@ export class CreateUserDto {
   @IsString({ message: 'O campo cnpj deve ser uma string.' })
   @IsOptional({ message: 'O campo cnpj é opcional.' })
   cnpj: string;
-
-  @IsDate({ message: 'O campo data de nascimento deve ser uma data.' })
-  @IsNotEmpty({ message: 'O campo data de nascimento não pode ser vazio.' })
-  @Transform(({ value }) => new Date(value))
-  birthDate: string;
 
   @IsEmail({}, { message: 'O campo e-mail deve ser um email válido.' })
   @IsNotEmpty({ message: 'O campo e-mail não pode ser vazio.' })
