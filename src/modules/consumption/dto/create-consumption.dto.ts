@@ -42,7 +42,7 @@ export class CreateConsumptionDto {
 
   @IsEnum(Pattern, { message: 'O padrão deve ser um texto válido.' })
   @IsOptional({ message: 'O padrão é opcional.' })
-  pattern: Pattern;
+  pattern?: Pattern;
 
   @IsInt({ message: 'O id do endereço deve ser um número inteiro válido.' })
   @IsPositive({

@@ -435,6 +435,21 @@ Para acessar as rotas do projeto:
 > | ------- | -------- | --------- | ------------------------------- |
 > | `accessToken` | required | string    | Token de autorização do usuário |
 
+#### • Query
+
+> | name    | type     | data type | description                     |
+> | ------- | -------- | --------- | ------------------------------- |
+> | `year`  | optional | number   | Ano |
+> | `month`  | optional | number   | Mês |
+> | `day`  | optional | string  | Dia da semana |
+> | `hour`  | optional | number   | Hora |
+> | `consumption`  | optional | number   | Consumo de água (m3) |
+> | `pattern`  | optional | string   | Padrão de consumo |
+> | `address`  | optional | number   | ID do endereço |
+> | `page` | optional | number   | Página |
+> | `limit` | optional | number    | Limite de registros por página |
+> | `sort` | optional | object   | Chave de ordenação |
+
 #### • Respostas
 
 > | http code | content-type       | response                                 |

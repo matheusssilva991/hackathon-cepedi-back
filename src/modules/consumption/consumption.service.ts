@@ -1,10 +1,11 @@
 import { AddressService } from './../address/address.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateConsumptionDto } from './dto/create-consumption.dto';
 import { UpdateConsumptionDto } from './dto/update-consumption.dto';
 import { Consumption } from './entities/consumption.entity';
+import { ConsumptionQueryDto } from './dto/consumption-query.dto';
 
 @Injectable()
 export class ConsumptionService {
@@ -23,6 +24,33 @@ export class ConsumptionService {
 
   async findAll() {
     return await this.consumptionRepository.find();
+  }
+
+  async findAllWithQuery(query: ConsumptionQueryDto) {
+    const filter = {
+      ...(query.year && { year: query.year }),
+      ...(query.month && { month: query.month }),
+      ...(query.day && { day: ILike(`%${query.day}%`) }),
+      ...(query.hour && { hour: query.hour }),
+      ...(query.consumption && { consumption: query.consumption }),
+      ...(query.pattern && { pattern: ILike(`%${query.pattern}%`) }),
+      ...(query.address && { addressId: query.address }),
+    };
+
+    // Ordenação
+    let sortObject: any;
+    try {
+      sortObject = JSON.parse(query.sort);
+    } catch (error) {
+      sortObject = { id: 'ASC' };
+    }
+
+    return await this.consumptionRepository.find({
+      where: filter,
+      order: sortObject,
+      take: query.limit || undefined,
+      skip: (query.page - 1) * query.limit || 0,
+    });
   }
 
   async findOne(id: number) {

@@ -30,7 +30,7 @@ export class Consumption {
   consumption: number;
 
   @Column({ name: 'pattern', type: 'varchar', length: 255, nullable: true })
-  pattern: string;
+  pattern?: string;
 
   @Column({ name: 'address_id', type: 'int', nullable: false })
   addressId: number;

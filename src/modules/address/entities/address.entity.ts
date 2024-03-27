@@ -26,7 +26,7 @@ export class Address {
   neighborhood: string;
 
   @Column({ name: 'complement', type: 'varchar', length: 255, nullable: true })
-  complement: string;
+  complement?: string;
 
   @Column({ name: 'city', type: 'varchar', length: 255, nullable: false })
   city: string;
@@ -54,7 +54,7 @@ export class Address {
     nullable: true,
     unique: true,
   })
-  cadUnico: string;
+  cadUnico?: string;
 
   @OneToMany(() => User, (user) => user.address, { onDelete: 'CASCADE' })
   users: User[];

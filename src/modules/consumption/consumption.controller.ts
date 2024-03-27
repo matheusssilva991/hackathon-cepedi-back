@@ -7,10 +7,12 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { ConsumptionService } from './consumption.service';
 import { CreateConsumptionDto } from './dto/create-consumption.dto';
 import { UpdateConsumptionDto } from './dto/update-consumption.dto';
+import { ConsumptionQueryDto } from './dto/consumption-query.dto';
 
 @Controller('api')
 export class ConsumptionController {
@@ -22,7 +24,10 @@ export class ConsumptionController {
   }
 
   @Get('consumptions')
-  async findAll() {
+  async findAll(@Query() query: ConsumptionQueryDto) {
+    if (Object.keys(query).length) {
+      return await this.consumptionService.findAllWithQuery(query);
+    }
     return await this.consumptionService.findAll();
   }
 
